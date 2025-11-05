@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to Immacare</title>
+  <link rel="stylesheet" href="landing.css" />
+</head>
+<body>
+  <div class="landing-container">
+    <div class="welcome-box">
+      <h1>Welcome to Immacare Clinic</h1>
+      <p>Your health is our top priority.</p>
+
+      <div class="actions">
+        <button class="btn book-btn" id="bookBtn">Book an Appointment</button>
+        <button class="btn login-btn" id="loginBtn">Login</button>
+        <button class="btn browse-btn" id="browseBtn">Continue as Guest</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Simulate login check using localStorage (you can replace with your real auth check)
+    const isLoggedIn = localStorage.getItem("userLoggedIn");
+
+    document.getElementById("bookBtn").addEventListener("click", () => {
+      if (isLoggedIn) {
+        window.location.href = "../homepage/homepage.html"; // adjust path as needed
+      } else {
+        alert("You must log in first before booking an appointment.");
+      }
+    });
+
+    document.getElementById("loginBtn").addEventListener("click", () => {
+      window.location.href = "../login/login.html";
+    });
+
+    document.getElementById("browseBtn").addEventListener("click", () => {
+      window.location.href = "../homepage/homepage.html"; // browse homepage as guest
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="/bootstrap-icons/font/bootstrap-icons.min.css"
+    />
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/jquery/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="/datatables.net-dt/css/dataTables.dataTables.css"
+    />
+    <script src="/datatables.net/js/dataTables.js"></script>
+    <script src="/datatables.net/js/dataTables.min.js"></script>
+    <script src="patient.js"></script>
+    <link rel="stylesheet " href="patient.css" />
+  </head>
+  <body>
+    <div class="card shadow-lg rounded p-4">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="mb-0">View History</h2>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-2 ms-auto d-flex justify-content-end"></div>
+      </div>
+      <table
+        id="patientHistory"
+        class="table table-light table-striped table-bordered table-hover"
+      >
+        <thead>
+          <tr>
+            <th>Consultation Date</th>
+            <th>Consultation Type</th>
+            <th>Doctor</th>
+            <th>Recommendation</th>
+            <th>Need follow up</th>
+            <th>Consultation Status</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+  </body>
+</html>

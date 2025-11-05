@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="/bootstrap-icons/font/bootstrap-icons.min.css"
+    />
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/jquery/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="/datatables.net-dt/css/dataTables.dataTables.css"
+    />
+    <script src="/datatables.net/js/dataTables.js"></script>
+    <script src="/datatables.net/js/dataTables.min.js"></script>
+    <script src="patient.js"></script>
+    <link rel="stylesheet " href="patient.css" />
+  </head>
+  <body>
+    <div class="card shadow-lg rounded p-4">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="mb-0">Patients List</h2>
+        <!-- <button
+        type="button"
+        class="btn btn-success btn-md"
+      >
+        Add Patient <i class="bi bi-person-add"></i>
+      </button> -->
+      </div>
+      <div class="container mt-5">
+        <input type="hidden" id="user_id" />
+        <input type="hidden" id="role" />
+        <div class="row mb-3">
+          <!-- Left side -->
+          <div class="col-md-5 d-flex align-items-center">
+            <label for="patientName" class="col-sm-4 col-form-label"
+              >Patient Name:</label
+            >
+            <div class="col-sm-8">
+              <input
+                type="text"
+                class="form-control criteria"
+                id="patientName"
+                name="patientName"
+                tabindex="1"
+              />
+            </div>
+          </div>
+
+          <!-- Right side -->
+          <div class="col-md-5 d-flex align-items-center">
+            <label for="emailAddress" class="col-sm-4 col-form-label"
+              >Email Address:</label
+            >
+            <div class="col-sm-8">
+              <input
+                type="text"
+                class="form-control criteria"
+                id="emailAddress"
+                name="emailAddress"
+                tabindex="1"
+              />
+            </div>
+          </div>
+          <div class="col-md-2 d-flex align-items-center">
+            <button
+              type="button"
+              id="clearList"
+              class="btn btn-info btn-sm w-30 me-2"
+              onclick="clearCriteria()"
+            >
+              Clear
+            </button>
+            <button
+              type="button"
+              id="searchList"
+              class="btn btn-success btn-sm w-30"
+              onclick="searchPatients()"
+            >
+              Search
+            </button>
+          </div>
+        </div>
+      </div>
+      <table
+        id="patientTable"
+        class="table table-light table-striped table-bordered table-hover"
+      >
+        <thead>
+          <tr>
+            <th class="hide-col">ID</th>
+            <th>Action</th>
+            <th>Patient Name</th>
+            <th>Gender</th>
+            <th>Age</th>
+            <th>Contact Number</th>
+            <th>Email Address</th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="/bootstrap-icons/font/bootstrap-icons.min.css"
+    />
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/jquery/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="/datatables.net-dt/css/dataTables.dataTables.css"
+    />
+    <script src="/datatables.net/js/dataTables.js"></script>
+    <script src="/datatables.net/js/dataTables.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="appointment_booking.js"></script>
+
+    <link rel="stylesheet" href="appointment_booking.css" />
+  </head>
+
+  <body>
+    <div class="card shadow-lg rounded p-4">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="mb-0">Appointment List</h2>
+        <input type="hidden" class="form-control" id="user_id_list" readonly />
+        <input type="hidden" class="form-control" id="role_list" readonly />
+      </div>
+      <div class="container mt-5">
+        <div class="row mb-3">
+          <!-- Left side -->
+          <div class="col-md-5 d-flex align-items-center">
+            <label for="date" class="col-sm-4 col-form-label"
+              >Booked Date:</label
+            >
+            <div class="col-sm-8">
+              <input
+                type="date"
+                class="form-control criteria"
+                id="bookingDate"
+                name="date"
+                tabindex="1"
+              />
+            </div>
+          </div>
+
+          <!-- Right side -->
+          <div class="col-md-5 d-flex align-items-center">
+            <label for="patientName" class="col-sm-4 col-form-label"
+              >Patient Name:</label
+            >
+            <div class="col-sm-8">
+              <input
+                type="text"
+                class="form-control criteria"
+                id="patientName"
+                name="patientName"
+                tabindex="1"
+              />
+            </div>
+          </div>
+
+          <div class="col-md-2 d-flex align-items-center">
+            <button
+              type="button"
+              class="btn btn-info btn-md w-50"
+              onclick="clearCriteria()"
+            >
+              Clear
+            </button>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <!-- Left side -->
+          <div class="col-md-5 d-flex align-items-center">
+            <label for="status" class="col-sm-4 col-form-label">Status:</label>
+            <div class="col-sm-8">
+              <select class="form-select criteria" id="status" name="status">
+                <option selected value=""></option>
+                <option value="Booked">Booked</option>
+                <option value="In Queue">In Queue</option>
+                <option value="Paid">Paid</option>
+                <option value="Completed">Completed</option>
+                <option value="Cancelled">Cancelled</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Right side -->
+          <div class="col-md-5 d-flex align-items-center">
+            <label for="consultationType" class="col-sm-4 col-form-label"
+              >Consultation type:</label
+            >
+            <div class="col-sm-8">
+              <select
+                class="form-select criteria"
+                id="consultationType"
+                name="consultationType"
+              >
+                <option selected value="">Select Specialty</option>
+                <option value="Prenatal">Prenatal</option>
+                <option value="Post Natal">Post Natal</option>
+                <option value="Family Planning">Family Planning</option>
+                <option value="Vaccination (Pedia and Adult)">Vaccination (Pedia and Adult)</option>
+                <option value="Ultrasound">Ultrasound</option>
+                <option value="Laboratory Services">Laboratory Services</option>
+                <option value="ECG">ECG</option>
+                <option value="Non-stress test for pregnant">Non-stress test for pregnant</option>
+                <option value="Hearing screening test">Hearing screening test</option>
+                <option value="2D Echo">2D Echo</option>
+                <option value="Minor Surgery">Minor Surgery</option>
+                <option value="Obgyne">Obgyne</option>
+                <option value="Pediatrician">Pediatrician</option>
+                <option value="Surgeon">Surgeon</option>
+                <option value="Internal Medicine">Internal Medicine</option>
+                <option value="Urologist">Urologist</option>
+                <option value="ENT">ENT</option>
+                <option value="Opthalmologist">Opthalmologist</option>
+                <option value="Ear Piercing">Ear Piercing</option>
+                <option value="Papsmear">Papsmear</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-md-2 d-flex align-items-center">
+            <button
+              type="button"
+              class="btn btn-success btn-md w-50"
+              onclick="searchBooking()"
+            >
+              Search
+            </button>
+          </div>
+        </div>
+      </div>
+      <table
+        id="bookingTable"
+        class="table table-light table-striped table-bordered table-hover"
+      >
+        <thead>
+          <tr>
+            <th class="hide-col">UserID</th>
+            <th>Action</th>
+            <th>Patient Name</th>
+            <th>Consultation Type</th>
+            <th>Booking Date</th>
+            <th>Queue No.</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+      </table>
+
+      <input type="hidden" id="booking_id" />
+      <input type="hidden" id="queue_no" />
+    </div>
+
+    <!-- GENERATE QUEUE NUMBER -->
+    <div
+      class="modal fade"
+      id="bookingModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+            <input type="hidden" id="role" />
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              View Booking
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="row mb-3 align-items-center">
+              <label
+                for="labelConsultationType"
+                class="col-sm-5 col-form-label text-end"
+              >
+                <strong>Consultation Type:</strong></label
+              >
+
+              <div class="col-sm-7">
+                <label
+                  id="labelConsultationType"
+                  class="form-control-plaintext"
+                ></label>
+              </div>
+            </div>
+
+            <div class="row mb-3 align-items-center">
+              <label
+                for="labelBookedDate"
+                class="col-sm-5 col-form-label text-end"
+                ><strong>Date:</strong></label
+              >
+              <div class="col-sm-7">
+                <label
+                  id="labelBookedDate"
+                  class="form-control-plaintext"
+                ></label>
+              </div>
+            </div>
+
+            <div class="row mb-3 align-items-center">
+              <label
+                for="labelBookedTime"
+                class="col-sm-5 col-form-label text-end"
+                ><strong>Time:</strong></label
+              >
+              <div class="col-sm-7">
+                <label
+                  id="labelBookedTime"
+                  class="form-control-plaintext"
+                ></label>
+              </div>
+            </div>
+            <hr />
+
+            <div class="row mb-3 align-items-center">
+              <label
+                for="labelFullname"
+                class="col-sm-5 col-form-label text-end"
+                ><strong>Fullname:</strong></label
+              >
+              <div class="col-sm-7">
+                <label
+                  id="labelFullname"
+                  class="form-control-plaintext"
+                ></label>
+              </div>
+            </div>
+
+            <div class="row mb-3 align-items-center">
+              <label for="labelGender" class="col-sm-5 col-form-label text-end"
+                ><strong>Gender:</strong></label
+              >
+              <div class="col-sm-7">
+                <label id="labelGender" class="form-control-plaintext"></label>
+              </div>
+            </div>
+
+            <div class="row mb-3 align-items-center">
+              <label for="labelAge" class="col-sm-5 col-form-label text-end"
+                ><strong>Age:</strong></label
+              >
+              <div class="col-sm-7">
+                <label id="labelAge" class="form-control-plaintext"></label>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer d-flex justify-content-between w-100">
+            <!-- Centered Button Wrapper -->
+            <div class="d-flex justify-content-center w-100">
+              <button
+                type="button"
+                class="btn btn-primary btn-lg"
+                id="generateQueueNumber"
+                onclick="generateQueueNumber()"
+              >
+                Generate Queue Number
+              </button>
+            </div>
+            <div class="d-flex justify-content-center w-100">
+              <button
+                type="button"
+                class="btn btn-danger btn-md me-2 updateBookingBtn"
+                id="cancelBooking"
+                onclick="cancelBooking()"
+              >
+                Cancel Booking
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary btn-md updateBookingBtn"
+                id="reschedBooking"
+                onclick="reschedBooking()"
+              >
+                Reschedule Booking
+              </button>
+            </div>
+
+            <!-- Right-Aligned Link -->
+            <!-- <a href="../patient/patient_profile.html" class="ms-auto">
+              See Patient Info
+            </a> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CANCEL/RESCHED MODAL -->
+    <div
+      class="modal fade"
+      id="reschedModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              Reschedule Booking
+            </h1>
+
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="container mt-4">
+              <div class="col-md-10 d-flex align-items-center mb-2">
+                <label for="newDateBooking" class="col-sm-4 col-form-label"
+                  >New Date:</label
+                >
+                <div class="col-sm-8">
+                  <input type="date" class="form-control" id="newDateBooking" />
+                </div>
+              </div>
+
+              <div class="col-md-10 d-flex align-items-center mb-2">
+                <label for="newTimeBooking" class="col-sm-4 col-form-label"
+                  >New Time:</label
+                >
+                <div class="col-sm-8">
+                  <select
+                    class="form-select"
+                    id="newTimeBooking"
+                    name="newTimeBooking"
+                  >
+                    <option selected value=""></option>
+                    <option value="8:00 AM - 9:00 AM">8:00 AM - 9:00 AM</option>
+                    <option value="9:00 AM - 10:00 AM">
+                      10:00 AM - 9:00 AM
+                    </option>
+                    <option value="10:00 AM - 11:00 AM">
+                      10:00 AM - 11:00 AM
+                    </option>
+                    <option value="11:00 AM - 12:00 PM">
+                      11:00 AM - 12:00 PM
+                    </option>
+                    <option value="12:00 PM - 1:00 PM">
+                      12:00 PM - 1:00 PM
+                    </option>
+                    <option value="1:00 PM - 2:00 PM">1:00 PM - 2:00 PM</option>
+                    <option value="2:00 PM - 3:00 PM">2:00 PM - 3:00 PM</option>
+                    <option value="3:00 PM - 4:00 PM">3:00 PM - 4:00 PM</option>
+                    <option value="4:00 PM - 5:00 PM">4:00 PM - 5:00 PM</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer d-flex justify-content-between w-100">
+            <!-- Centered Button Wrapper -->
+            <div class="d-flex justify-content-center w-100">
+              <button
+                type="button"
+                class="btn btn-success btn-md"
+                id="generateQueueNumber"
+                onclick="saveNewBooking()"
+              >
+                Save New Schedule of Booking
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAG BOOKING -->
+    <div
+      class="modal fade"
+      id="tagModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+            <input type="hidden" id="role" />
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Tag Booking</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="row mb-3 align-items-center">
+              <label
+                for="labelConsultationType2"
+                class="col-sm-5 col-form-label text-end"
+              >
+                <strong>Consultation Type:</strong></label
+              >
+
+              <div class="col-sm-7">
+                <label
+                  id="labelConsultationType2"
+                  class="form-control-plaintext"
+                ></label>
+              </div>
+            </div>
+
+            <div class="row mb-3 align-items-center">
+              <label
+                for="labelBookedDate2"
+                class="col-sm-5 col-form-label text-end"
+                ><strong>Date:</strong></label
+              >
+              <div class="col-sm-7">
+                <label
+                  id="labelBookedDate2"
+                  class="form-control-plaintext"
+                ></label>
+              </div>
+            </div>
+
+            <div class="row mb-3 align-items-center">
+              <label
+                for="labelBookedTime2"
+                class="col-sm-5 col-form-label text-end"
+                ><strong>Time:</strong></label
+              >
+              <div class="col-sm-7">
+                <label
+                  id="labelBookedTime2"
+                  class="form-control-plaintext"
+                ></label>
+              </div>
+            </div>
+            <hr />
+
+            <div class="row mb-3 align-items-center">
+              <label
+                for="labelFullname2"
+                class="col-sm-5 col-form-label text-end"
+                ><strong>Fullname:</strong></label
+              >
+              <div class="col-sm-7">
+                <label
+                  id="labelFullname2"
+                  class="form-control-plaintext"
+                ></label>
+              </div>
+            </div>
+
+            <div class="row mb-3 align-items-center">
+              <label for="labelGender2" class="col-sm-5 col-form-label text-end"
+                ><strong>Gender:</strong></label
+              >
+              <div class="col-sm-7">
+                <label id="labelGender2" class="form-control-plaintext"></label>
+              </div>
+            </div>
+
+            <div class="row mb-3 align-items-center">
+              <label for="labelAge2" class="col-sm-5 col-form-label text-end"
+                ><strong>Age:</strong></label
+              >
+              <div class="col-sm-7">
+                <label id="labelAge2" class="form-control-plaintext"></label>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer d-flex justify-content-between w-100">
+            <div class="d-flex justify-content-center w-100">
+              <div class="col-md-8 d-flex align-items-center me-2">
+                <label for="tag" class="col-sm-4 col-form-label"
+                  >Tag as:
+                </label>
+                <div class="col-sm-8">
+                  <select class="form-select criteria" id="tag">
+                    <option selected value=""></option>
+                    <option value="Emergency">Emergency Booking</option>
+                    <option value="Cancelled">Cancel Booking</option>
+                    <option value="Completed">Completed Booking</option>
+                  </select>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="btn btn-primary btn-sm me-2"
+                onclick="saveTag()"
+                id="saveTag"
+              >
+                Save <i class="bi bi-save"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Immacare+</title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="/bootstrap-icons/font/bootstrap-icons.min.css"
+    />
+
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/jquery/jquery.min.js"></script>
+    <script src="appointment_booking.js"></script>
+    <link rel="stylesheet" href="appointment_booking.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </head>
+
+  <body>
+    <div class="card shadow-lg rounded p-4">
+      <h2>APPOINTMENT BOOKING</h2>
+      <div class="row mt-3">
+        <div class="col-md-6 d-flex align-items-center">
+          <label for="consultationType" class="col-sm-5 col-form-label"
+            >Select Consultation type:</label
+          >
+          <div class="col-sm-7">
+            <select
+              class="form-select criteria"
+              id="consultationType"
+              name="consultationType"
+            >
+              <option selected value="">Select Specialty</option>
+              <option value="1">Prenatal</option>
+              <option value="2">Post Natal</option>
+              <option value="3">Family Planning</option>
+              <option value="4">Vaccination (Pedia and Adult)</option>
+              <option value="5">Ultrasound</option>
+              <option value="6">Laboratory Services</option>
+              <option value="7">ECG</option>
+              <option value="8">Non-stress test for pregnant</option>
+              <option value="9">Hearing screening test</option>
+              <option value="10">2D Echo</option>
+              <option value="11">Minor Surgery</option>
+              <option value="12">Obgyne</option>
+              <option value="13">Pediatrician</option>
+              <option value="14">Surgeon</option>
+              <option value="15">Internal Medicine</option>
+              <option value="16">Urologist</option>
+              <option value="17">ENT</option>
+              <option value="18">Opthalmologist</option>
+              <option value="19">Ear Piercing</option>
+              <option value="20">Papsmear</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-6 d-flex align-items-center">
+          <label for="consultationType" class="col-sm-5 col-form-label"
+            >Select your Doctor:</label
+          >
+          <div class="col-sm-7">
+            <select
+              class="form-select criteria"
+              id="doctorSelect"
+              name="doctorSelect"
+            >
+              <option selected value="">-- Select Doctor --</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <div class="container mt-4">
+            <input type="hidden" class="form-control" id="user_id_booking" />
+            <input
+              type="hidden"
+              class="form-control"
+              id="selectedDate"
+              name="selectedDate"
+            />
+            <input
+              type="hidden"
+              class="form-control"
+              id="selectedTime"
+              name="selectedTime"
+            />
+
+            <!-- calendar -->
+            <div class="card p-4 shadow">
+              <div
+                class="d-flex justify-content-between align-items-center mb-3"
+              >
+                <button class="btn btn-sm btn-outline-primary" id="prevMonth">
+                  «
+                </button>
+                <h4 id="monthAndYear" class="mb-0"></h4>
+                <button class="btn btn-sm btn-outline-primary" id="nextMonth">
+                  »
+                </button>
+              </div>
+
+              <table class="table table-bordered text-center">
+                <thead class="table-light">
+                  <tr>
+                    <th>Sun</th>
+                    <th>Mon</th>
+                    <th>Tue</th>
+                    <th>Wed</th>
+                    <th>Thu</th>
+                    <th>Fri</th>
+                    <th>Sat</th>
+                  </tr>
+                </thead>
+                <tbody id="calendarBody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-6">
+          <div class="container">
+            <div class="col-md-8 d-flex align-items-center">
+              <!-- consultation type dropdown -->
+              <div class="col-sm-8"></div>
+            </div>
+            <div class="buttons-time mt-3">
+              <button
+                type="button"
+                class="btn btn-light btn-md w-100 border border-dark buttonTime"
+                style="margin-top: 10px"
+              >
+                8:00 AM - 9:00 AM
+              </button>
+              <button
+                type="button"
+                class="btn btn-light btn-md w-100 border border-dark buttonTime"
+              >
+                9:00 AM - 10:00 AM
+              </button>
+              <button
+                type="button"
+                class="btn btn-light btn-md w-100 border border-dark buttonTime"
+              >
+                10:00 AM - 11:00 AM
+              </button>
+              <button
+                type="button"
+                class="btn btn-light btn-md w-100 border border-dark buttonTime"
+              >
+                11:00 AM - 12:00 PM
+              </button>
+              <button
+                type="button"
+                class="btn btn-light btn-md w-100 border border-dark buttonTime"
+              >
+                12:00 PM - 1:00 PM
+              </button>
+              <button
+                type="button"
+                class="btn btn-light btn-md w-100 border border-dark buttonTime"
+              >
+                1:00 PM - 2:00 PM
+              </button>
+              <button
+                type="button"
+                class="btn btn-light btn-md w-100 border border-dark buttonTime"
+              >
+                2:00 PM - 3:00 PM
+              </button>
+              <button
+                type="button"
+                class="btn btn-light btn-md w-100 border border-dark buttonTime"
+              >
+                3:00 PM - 4:00 PM
+              </button>
+              <button
+                type="button"
+                class="btn btn-light btn-md w-100 border border-dark buttonTime"
+              >
+                4:00 PM - 5:00 PM
+              </button>
+              <a
+                id="nextBtn"
+                type="button"
+                class="btn btn-secondary btn-md w-100 buttonTime disabled"
+                href="../appointment_booking/appointment_patient_form.html"
+              >
+                Next: Patient Form <i class="bi bi-arrow-right-circle"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

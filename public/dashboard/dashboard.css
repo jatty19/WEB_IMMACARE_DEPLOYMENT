@@ -1,0 +1,58 @@
+.footer-clickable {
+  color: #000; /* Default text color */
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.footer-clickable:hover {
+  background-color: #f1f1f1; /* Light gray hover background */
+  color: #007bff; /* Bootstrap primary color or your preferred color */
+  cursor: pointer;
+}
+
+.card-body {
+  font-size: 70px;
+}
+
+.card1body {
+  background-color: #a0c878;
+}
+
+.card1header, .card1footer{
+    background-color: #5F8B4C;
+    color: white;
+}
+
+.card2body {
+  background-color: #789DBC;
+}
+
+.card2header, .card2footer{
+    background-color: #074799;
+    color: white;
+}
+
+.card3body {
+  background-color: #EFF396;
+}
+
+.card3header, .card3footer{
+    background-color: #F9D923;
+}
+
+.card4body {
+  background-color: #FFA673;
+}
+
+.card4header, .card4footer{
+    background-color: #FF7D29;
+}
+body {
+  font-size: 15px; /* or smaller */
+}
+
+table, td, th, input, button, select {
+  font-size: inherit;
+}
+
+
+

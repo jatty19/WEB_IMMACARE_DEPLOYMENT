@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="/bootstrap-icons/font/bootstrap-icons.min.css"
+    />
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/jquery/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="/datatables.net-dt/css/dataTables.dataTables.css"
+    />
+    <script src="/datatables.net/js/dataTables.js"></script>
+    <script src="/datatables.net/js/dataTables.min.js"></script>
+    <script src="doctors.js"></script>
+    <link rel="stylesheet" href="doctors.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </head>
+  <body>
+    <div class="card shadow-lg rounded p-4 mb-4">
+      <h2>Doctors Profile</h2>
+      <hr />
+      <input type="hidden" id="user_id" />
+      <div class="row mb-3">
+        <!-- Left side -->
+        <div class="col-md-6 d-flex align-items-center">
+          <label for="basicinfo" class="col-sm-6 col-form-label labelTag"
+            ><strong class="headerInfo">Basic Information</strong></label
+          >
+        </div>
+
+        <!-- Right side -->
+        <div class="col-md-6 d-flex align-items-center">
+          <label for="professionalInfo" class="col-sm-6 col-form-label labelTag"
+            ><strong class="headerInfo">Professional Information</strong></label
+          >
+        </div>
+        <div class="container mt-4">
+          <div class="row mb-3">
+            <!-- Left side -->
+            <div class="col-md-6 d-flex align-items-center">
+              <label for="firstname" class="col-sm-4 col-form-label"
+                >Firstname:</label
+              >
+              <div class="col-sm-8">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="firstname"
+                  name="firstname"
+                  tabindex="1"
+                />
+              </div>
+            </div>
+
+            <!-- Right side -->
+            <div class="col-md-6 d-flex align-items-center">
+              <label for="specialty" class="col-sm-4 col-form-label"
+                >Specialty:</label
+              >
+              <div class="col-sm-8">
+                <select class="form-select" id="specialty" name="specialty">
+                  <option selected value=""></option>
+                  <option value="1">Prenatal</option>
+                  <option value="2">Post Natal</option>
+                  <option value="3">Family Planning</option>
+                  <option value="4">Vaccination (Pedia and Adult)</option>
+                  <option value="5">Ultrasound</option>
+                  <option value="6">Laboratory Services</option>
+                  <option value="7">ECG</option>
+                  <option value="8">Non-stress test for pregnant</option>
+                  <option value="9">Hearing screening test</option>
+                  <option value="10">2D Echo</option>
+                  <option value="11">Minor Surgery</option>
+                  <option value="12">Obgyne</option>
+                  <option value="13">Pediatrician</option>
+                  <option value="14">Surgeon</option>
+                  <option value="15">Internal Medicine</option>
+                  <option value="16">Urologist</option>
+                  <option value="17">ENT</option>
+                  <option value="18">Opthalmologist</option>
+                  <option value="19">Ear Piercing</option>
+                  <option value="20">Papsmear</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- MIDDLENAME -->
+          <div class="row mb-3">
+            <!-- Left side -->
+            <div class="col-md-6 d-flex align-items-center">
+              <label for="middlename" class="col-sm-4 col-form-label"
+                >Middlename:</label
+              >
+              <div class="col-sm-8">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="middlename"
+                  name="middlename"
+                  tabindex="1"
+                />
+              </div>
+            </div>
+
+            <!-- Right side -->
+            <div class="col-md-6 d-flex align-items-center">
+              <label for="department" class="col-sm-4 col-form-label"
+                >Department:</label
+              >
+              <div class="col-sm-8">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="department"
+                  name="department"
+                />
+              </div>
+            </div>
+          </div>
+          <!-- LASTNAME -->
+          <div class="row mb-3">
+            <!-- Left side -->
+            <div class="col-md-6 d-flex align-items-center">
+              <label for="lastname" class="col-sm-4 col-form-label"
+                >Lastname:</label
+              >
+              <div class="col-sm-8">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="lastname"
+                  name="lastname"
+                  tabindex="1"
+                />
+              </div>
+            </div>
+
+            <!-- Right side -->
+            <div class="col-md-6 d-flex align-items-center">
+              <label for="yearsofexp" class="col-sm-4 col-form-label"
+                >Years of Experience:</label
+              >
+              <div class="col-sm-8">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="yearsofexp"
+                  name="yearsofexp"
+                  tabindex="4"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- GENDER -->
+          <div class="row mb-3">
+            <!-- Left side -->
+            <div class="col-md-6 d-flex align-items-center">
+              <label for="gender" class="col-sm-4 col-form-label"
+                >Gender:</label
+              >
+              <div class="col-sm-8">
+                <select class="form-select" id="gender" name="gender">
+                  <option>Select Gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Right side -->
+            <div class="col-md-6 d-flex align-items-center">
+              <label for="professionalBoard" class="col-sm-4 col-form-label"
+                >Professional Board:</label
+              >
+              <div class="col-sm-8">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="professionalBoard"
+                  name="professionalBoard"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <!-- Left side -->
+            <div class="col-md-6 d-flex align-items-center">
+              <label for="dateofBirth" class="col-sm-4 col-form-label"
+                >Date of Birth:</label
+              >
+              <div class="col-sm-8">
+                <input
+                  type="date"
+                  class="form-control"
+                  id="dateofBirth"
+                  name="dateofBirth"
+                  tabindex="3"
+                />
+              </div>
+            </div>
+
+            <!-- Right side -->
+            <div class="col-md-6 d-flex align-items-center">
+              <label for="certificate" class="col-sm-4 col-form-label"
+                >Certificate:</label
+              >
+              <div class="col-sm-8">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="certificate"
+                  name="certificate"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <!-- Left side -->
+            <div class="col-md-6 d-flex align-items-center">
+              <label for="age" class="col-sm-4 col-form-label">Age:</label>
+              <div class="col-sm-8">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="age"
+                  name="age"
+                  tabindex="4"
+                />
+              </div>
+            </div>
+
+            <!-- Right side -->
+            <div class="col-md-6 d-flex align-items-center">
+              <label for="status" class="col-sm-4 col-form-label"
+                >Status:</label
+              >
+              <div class="col-sm-8">
+                <select class="form-select" id="status" name="status">
+                  <option selected>Select Status</option>
+                  <option value="Active">Active</option>
+                  <option value="Inactive">Inactive</option>
+                  <option value="On Leave">On Leave</option>
+                  <option value="Retired">Retired</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <!-- Left side -->
+            <div class="col-md-6 d-flex align-items-center">
+              <label for="contactNumber" class="col-sm-4 col-form-label"
+                >Contact Number:</label
+              >
+              <div class="col-sm-8">
+                <input
+                  type="number"
+                  class="form-control"
+                  id="contactNumber"
+                  name="contactNumber"
+                  tabindex="5"
+                />
+              </div>
+            </div>
+            <!-- Right side -->
+          </div>
+          <div class="row mb-3">
+            <!-- Left side -->
+            <div class="col-md-6 d-flex align-items-center">
+              <label for="emailAddress" class="col-sm-4 col-form-label"
+                >Email Address:</label
+              >
+              <div class="col-sm-8">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="emailAddress"
+                  name="emailAddress"
+                  tabindex="6"
+                />
+              </div>
+            </div>
+            <!-- Right side -->
+
+            <div
+              class="col-md-6 d-flex align-items-center ms-auto justify-content-end"
+            >
+              <button
+                type="button"
+                id="updateButton"
+                class="btn btn-light border w-50 me-2"
+                onclick="handleButtonUpdate()"
+              >
+                Update Info <i class="bi bi-pencil-square"></i>
+              </button>
+
+              <button
+                type="button"
+                class="btn btn-light border btn-md w-50"
+                onclick="changePasswordModal()"
+              >
+                Change Password <i class="bi bi-eye"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADD ITEM Modal -->
+    <div
+      class="modal fade"
+      id="changePasswordModal2"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              Change Password
+            </h1>
+
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          <div class="modal-body">
+            <div class="container mt-4">
+              <div class="col-md-10 d-flex align-items-center mb-2">
+                <label for="password" class="col-sm-4 col-form-label"
+                  >New Password:</label
+                >
+                <div class="col-sm-8">
+                  <input type="password" class="form-control" id="password" />
+                </div>
+              </div>
+
+              <div class="col-md-10 d-flex align-items-center mb-2">
+                <label for="confirmPassword" class="col-sm-4 col-form-label"
+                  >Confirm Password:</label
+                >
+                <div class="col-sm-8">
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="confirmPassword"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" onclick="discardChanges()">Discard</button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="savePasswordChanges()"
+            >
+              Save New Password
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

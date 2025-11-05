@@ -1,0 +1,72 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(to bottom right, #f5f8fb, #e6eef5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.landing-container {
+  text-align: center;
+  background: #fff;
+  padding: 50px 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 500px;
+}
+
+h1 {
+  font-size: 26px;
+  color: #222;
+}
+
+p {
+  color: #666;
+  font-size: 15px;
+  margin: 10px 0 30px;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.book-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+.book-btn:hover {
+  background-color: #449d48;
+}
+
+.login-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.login-btn:hover {
+  background-color: #0069d9;
+}
+
+.browse-btn {
+  background-color: #f1f1f1;
+  color: #333;
+}
+
+.browse-btn:hover {
+  background-color: #e5e5e5;
+}

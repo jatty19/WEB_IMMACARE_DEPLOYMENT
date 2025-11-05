@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="/bootstrap-icons/font/bootstrap-icons.min.css"
+    />
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/jquery/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="/datatables.net-dt/css/dataTables.dataTables.css"
+    />
+    <script src="/datatables.net/js/dataTables.js"></script>
+    <script src="/datatables.net/js/dataTables.min.js"></script>
+    <script src="patient.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet " href="patient.css" />
+  </head>
+  <body>
+    <h2>PATIENTS FORM</h2>
+    <div class="container">
+      <!-- Step Indicator -->
+      <div class="step-indicator d-flex justify-content-between mb-4">
+        <div class="step" id="indicator-0">
+          <span>1</span>
+          <div>Basic Information</div>
+        </div>
+        <div class="step" id="indicator-1">
+          <span>2</span>
+          <div>Contact Information</div>
+        </div>
+        <div class="step" id="indicator-2">
+          <span>3</span>
+          <div>Emergency Contact</div>
+        </div>
+        <div class="step" id="indicator-3">
+          <span>4</span>
+          <div>Medical Information</div>
+        </div>
+        <div class="step" id="indicator-4">
+          <span>5</span>
+          <div>Confirm</div>
+        </div>
+      </div>
+
+      <!-- Step 1 -->
+      <div class="form-step active">
+        <h5>Step 1: Basic Information</h5>
+        <div class="row mb-3 align-items-center">
+          <label for="firstname" class="col-sm-3 col-form-label text-end">
+            Firstname:
+          </label>
+          <div class="col-sm-6">
+            <input
+              type="text"
+              class="form-control"
+              id="firstname"
+              name="firstname"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3 align-items-center">
+          <!-- Left side -->
+          <label for="middlename" class="col-sm-3 col-form-label text-end">
+            Middlename:
+          </label>
+          <div class="col-sm-6">
+            <input
+              type="text"
+              class="form-control"
+              id="middlename"
+              name="middlename"
+            />
+          </div>
+        </div>
+        <div class="row mb-3 align-items-center">
+          <!-- Left side -->
+          <label for="lastname" class="col-sm-3 col-form-label text-end">
+            Lastname:
+          </label>
+          <div class="col-sm-6">
+            <input
+              type="text"
+              class="form-control"
+              id="lastname"
+              name="lastname"
+            />
+          </div>
+        </div>
+        <div class="row mb-3 align-items-center">
+          <!-- Left side -->
+          <label for="gender" class="col-sm-3 col-form-label text-end"
+            >Gender:</label
+          >
+          <div class="col-sm-6">
+            <select class="form-select" id="gender" name="gender" tabindex="7">
+              <option value="" selected disabled>Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+          </div>
+        </div>
+        <div class="row mb-3 align-items-center">
+          <!-- Left side -->
+          <label for="birthdate" class="col-sm-3 col-form-label text-end"
+            >Birthdate:</label
+          >
+          <div class="col-sm-6">
+            <input
+              type="date"
+              class="form-control"
+              id="birthdate"
+              name="birthdate"
+              tabindex="5"
+            />
+          </div>
+        </div>
+        <div class="row mb-3 align-items-center">
+          <!-- Left side -->
+          <label for="age" class="col-sm-3 col-form-label text-end">Age:</label>
+          <div class="col-sm-6">
+            <input
+              type="number"
+              class="form-control"
+              id="age"
+              name="age"
+              readonly
+            />
+          </div>
+        </div>
+        <div class="row mb-3 align-items-center">
+          <!-- Left side -->
+          <label for="civilStatus" class="col-sm-3 col-form-label text-end"
+            >Civil Status:</label
+          >
+          <div class="col-sm-6">
+            <select
+              class="form-select"
+              id="civilStatus"
+              name="civilStatus"
+              tabindex="7"
+            >
+              <option value="" selected disabled>Select Civil Status</option>
+              <option value="Single">Single</option>
+              <option value="Married">Married</option>
+              <option value="Divorced">Divorced</option>
+              <option value="Widowed">Widowed</option>
+              <option value="Separated">Separated</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn btn-primary float-end" onclick="nextStep()">
+          Next
+        </button>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="form-step">
+        <h5>Step 2: Contact Details</h5>
+        <div class="row mb-3 align-items-center">
+          <!-- Left side -->
+          <label for="mobileNum2" class="col-sm-3 col-form-label text-end">
+            Mobile Number:
+          </label>
+          <div class="col-sm-6">
+            <input
+              type="number"
+              class="form-control"
+              id="mobileNum2"
+              name="mobileNum2"
+            />
+          </div>
+        </div>
+        <div class="row mb-3 align-items-center">
+          <!-- Left side -->
+          <label for="email" class="col-sm-3 col-form-label text-end">
+            Email Address:
+          </label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" id="email" name="email" />
+          </div>
+        </div>
+        <div class="row mb-3 align-items-center">
+          <!-- Left side -->
+          <label for="homeAddress" class="col-sm-3 col-form-label text-end">
+            Home Address:
+          </label>
+          <div class="col-sm-6">
+            <textarea class="form-control" id="homeAddress" rows="1"></textarea>
+          </div>
+        </div>
+        <div class="d-flex justify-content-between">
+          <button class="btn btn-secondary" onclick="prevStep()">
+            Previous
+          </button>
+          <button class="btn btn-primary" onclick="nextStep()">Next</button>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="form-step">
+        <h5>Step 3: Emergency Contact</h5>
+        <div class="row mb-3 align-items-center">
+          <!-- Left side -->
+          <label for="name" class="col-sm-3 col-form-label text-end">
+            Name:
+          </label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" id="name" name="name" />
+          </div>
+        </div>
+        <div class="row mb-3 align-items-center">
+          <!-- Left side -->
+          <label for="relationship" class="col-sm-3 col-form-label text-end">
+            Relationship:
+          </label>
+          <div class="col-sm-6">
+            <select class="form-select" id="relationship" name="relationship">
+              <option value="" selected disabled>Select Relationship</option>
+              <option value="Single">Parent</option>
+              <option value="Married">Brother</option>
+              <option value="Divorced">Sister</option>
+              <option value="Widowed">Spouse</option>
+              <option value="Separated">Other family member</option>
+            </select>
+          </div>
+        </div>
+        <div class="row mb-3 align-items-center">
+          <!-- Left side -->
+          <label for="mobileNum3" class="col-sm-3 col-form-label text-end">
+            Mobile Number:
+          </label>
+          <div class="col-sm-6">
+            <input
+              type="number"
+              class="form-control"
+              id="mobileNum3"
+              name="mobileNum3"
+            />
+          </div>
+        </div>
+        <div class="d-flex justify-content-between">
+          <button class="btn btn-secondary" onclick="prevStep()">
+            Previous
+          </button>
+          <button class="btn btn-primary" onclick="nextStep()">Next</button>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="form-step">
+        <h5>Step 4: Medical Information</h5>
+        <div class="row mb-3 align-items-center">
+          <!-- Left side -->
+          <label for="bloodType" class="col-sm-3 col-form-label text-end">
+            Bloodtype:
+          </label>
+          <div class="col-sm-6">
+            <select class="form-select" id="bloodType" name="bloodType">
+              <option value="" selected disabled>Select Bloodtype</option>
+              <option value="single">A+</option>
+              <option value="married">A-</option>
+              <option value="divorced">B+</option>
+              <option value="widowed">B-</option>
+              <option value="separated">AB+</option>
+              <option value="separated">AB-</option>
+              <option value="separated">O+</option>
+              <option value="separated">O-</option>
+            </select>
+          </div>
+        </div>
+        <div class="row mb-3 align-items-center">
+          <!-- Left side -->
+          <label for="alergies" class="col-sm-3 col-form-label text-end">
+            Alergies:
+          </label>
+          <div class="col-sm-6">
+            <input
+              type="text"
+              class="form-control"
+              id="alergies"
+              name="alergies"
+            />
+          </div>
+        </div>
+        <div class="row mb-3 align-items-center">
+          <!-- Left side -->
+          <label
+            for="currentMedication"
+            class="col-sm-3 col-form-label text-end"
+          >
+            Current Medication:
+          </label>
+          <div class="col-sm-6">
+            <input
+              type="text"
+              class="form-control"
+              id="currentMedication"
+              name="currentMedication"
+            />
+          </div>
+        </div>
+        <div class="row mb-3 align-items-center">
+          <!-- Left side -->
+          <label
+            for="pastMedicalConditions"
+            class="col-sm-3 col-form-label text-end"
+          >
+            Past Medical Conditon:
+          </label>
+          <div class="col-sm-6">
+            <input
+              type="text"
+              class="form-control"
+              id="pastMedicalConditions"
+              name="pastMedicalConditions"
+            />
+          </div>
+        </div>
+        <div class="row mb-3 align-items-center">
+          <!-- Left side -->
+          <label for="chronicIllnes" class="col-sm-3 col-form-label text-end">
+            Chronic Illness:
+          </label>
+          <div class="col-sm-6">
+            <input
+              type="text"
+              class="form-control"
+              id="chronicIllnes"
+              name="chronicIllnes"
+              placeholder="eg., diabetes, hypertension"
+            />
+          </div>
+        </div>
+        <div class="d-flex justify-content-between">
+          <button class="btn btn-secondary" onclick="prevStep()">
+            Previous
+          </button>
+          <button class="btn btn-primary" onclick="nextStep()">Next</button>
+        </div>
+      </div>
+
+      <!-- Step 5 -->
+      <div class="form-step">
+        <h5>Step 5: Confirmation</h5>
+        <p>Review your information and click submit.</p>
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-md-6">
+              <div class="col-md-6 d-flex align-items-center">
+                <label for="basicinfo" class="col-sm-6 col-form-label labelTag"
+                  ><strong>Basic Information</strong></label
+                >
+              </div>
+              <div class="row mb-3 align-items-center">
+                <label
+                  for="labelFirstname"
+                  class="col-sm-4 col-form-label text-end"
+                  >Firstname:</label
+                >
+                <div class="col-sm-8">
+                  <span
+                    id="labelFirstname"
+                    class="form-control-plaintext"
+                  ></span>
+                </div>
+              </div>
+
+              <div class="row mb-3 align-items-center">
+                <label
+                  for="labelMiddlename"
+                  class="col-sm-4 col-form-label text-end"
+                  >Middlename:</label
+                >
+                <div class="col-sm-8">
+                  <span
+                    id="labelMiddlename"
+                    class="form-control-plaintext"
+                  ></span>
+                </div>
+              </div>
+
+              <div class="row mb-3 align-items-center">
+                <label
+                  for="labelLastname"
+                  class="col-sm-4 col-form-label text-end"
+                  >Lastname:</label
+                >
+                <div class="col-sm-8">
+                  <span
+                    id="labelLastname"
+                    class="form-control-plaintext"
+                  ></span>
+                </div>
+              </div>
+
+              <div class="row mb-3 align-items-center">
+                <label
+                  for="labelGender"
+                  class="col-sm-4 col-form-label text-end"
+                  >Gender:</label
+                >
+                <div class="col-sm-8">
+                  <span id="labelGender" class="form-control-plaintext"></span>
+                </div>
+              </div>
+
+              <div class="row mb-3 align-items-center">
+                <label
+                  for="labelBirthdate"
+                  class="col-sm-4 col-form-label text-end"
+                  >Birthdate:</label
+                >
+                <div class="col-sm-8">
+                  <span
+                    id="labelBirthdate"
+                    class="form-control-plaintext"
+                  ></span>
+                </div>
+              </div>
+
+              <div class="row mb-3 align-items-center">
+                <label for="labelAge" class="col-sm-4 col-form-label text-end"
+                  >Age:</label
+                >
+                <div class="col-sm-8">
+                  <span id="labelAge" class="form-control-plaintext"></span>
+                </div>
+              </div>
+
+              <div class="row mb-3 align-items-center">
+                <label
+                  for="labelCivilStatus"
+                  class="col-sm-4 col-form-label text-end"
+                  >Civil Status:</label
+                >
+                <div class="col-sm-8">
+                  <span
+                    id="labelCivilStatus"
+                    class="form-control-plaintext"
+                  ></span>
+                </div>
+              </div>
+
+              <div class="mb-2 mt-4">
+                <strong>Contact Information</strong>
+              </div>
+
+              <div class="row mb-3 align-items-center">
+                <label
+                  for="labelMobilenum"
+                  class="col-sm-4 col-form-label text-end"
+                  >Mobile Number:</label
+                >
+                <div class="col-sm-8">
+                  <span
+                    id="labelMobilenum"
+                    class="form-control-plaintext"
+                  ></span>
+                </div>
+              </div>
+
+              <div class="row mb-3 align-items-center">
+                <label
+                  for="labelEmailadd"
+                  class="col-sm-4 col-form-label text-end"
+                  >Email Address:</label
+                >
+                <div class="col-sm-8">
+                  <span
+                    id="labelEmailadd"
+                    class="form-control-plaintext"
+                  ></span>
+                </div>
+              </div>
+
+              <div class="row mb-3 align-items-center">
+                <label
+                  for="labelHomeadd"
+                  class="col-sm-4 col-form-label text-end"
+                  >Home Address:</label
+                >
+                <div class="col-sm-8">
+                  <span id="labelHomeadd" class="form-control-plaintext"></span>
+                </div>
+              </div>
+
+              <div class="mb-2 mt-4">
+                <strong>Emergency Contact</strong>
+              </div>
+
+              <div class="row mb-3 align-items-center">
+                <label for="labelName" class="col-sm-4 col-form-label text-end"
+                  >Name:</label
+                >
+                <div class="col-sm-8">
+                  <span id="labelName" class="form-control-plaintext"></span>
+                </div>
+              </div>
+
+              <div class="row mb-3 align-items-center">
+                <label
+                  for="labelRelationship"
+                  class="col-sm-4 col-form-label text-end"
+                  >Relationship:</label
+                >
+                <div class="col-sm-8">
+                  <span
+                    id="labelRelationship"
+                    class="form-control-plaintext"
+                  ></span>
+                </div>
+              </div>
+
+              <div class="row mb-3 align-items-center">
+                <label
+                  for="labelMobilenum2"
+                  class="col-sm-4 col-form-label text-end"
+                  >Mobile Number:</label
+                >
+                <div class="col-sm-8">
+                  <span
+                    id="labelMobilenum2"
+                    class="form-control-plaintext"
+                  ></span>
+                </div>
+              </div>
+
+              <div class="mb-2 mt-4">
+                <strong>Medical Information</strong>
+              </div>
+
+              <div class="row mb-3 align-items-center">
+                <label
+                  for="labelBloodtype"
+                  class="col-sm-4 col-form-label text-end"
+                  >Bloodtype:</label
+                >
+                <div class="col-sm-8">
+                  <span
+                    id="labelBloodtype"
+                    class="form-control-plaintext"
+                  ></span>
+                </div>
+              </div>
+
+              <div class="row mb-3 align-items-center">
+                <label
+                  for="labelAlergies"
+                  class="col-sm-4 col-form-label text-end"
+                  >Allergies:</label
+                >
+                <div class="col-sm-8">
+                  <span
+                    id="labelAlergies"
+                    class="form-control-plaintext"
+                  ></span>
+                </div>
+              </div>
+
+              <div class="row mb-3 align-items-center">
+                <label
+                  for="labelCurrentMed"
+                  class="col-sm-4 col-form-label text-end"
+                  >Current Medication:</label
+                >
+                <div class="col-sm-8">
+                  <span
+                    id="labelCurrentMed"
+                    class="form-control-plaintext"
+                  ></span>
+                </div>
+              </div>
+
+              <div class="row mb-3 align-items-center">
+                <label
+                  for="labelPastmed"
+                  class="col-sm-4 col-form-label text-end"
+                  >Past Medical Condition:</label
+                >
+                <div class="col-sm-8">
+                  <span id="labelPastmed" class="form-control-plaintext"></span>
+                </div>
+              </div>
+
+              <div class="row mb-3 align-items-center">
+                <label
+                  for="labelChronicill"
+                  class="col-sm-4 col-form-label text-end"
+                  >Chronic Illness:</label
+                >
+                <div class="col-sm-8">
+                  <span
+                    id="labelChronicill"
+                    class="form-control-plaintext"
+                  ></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-between lastnext">
+            <button class="btn btn-secondary" onclick="prevStep()">
+              Previous
+            </button>
+            <button class="btn btn-success" id="createPatientButton">
+              Create Patient <i class="bi bi-person-add"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

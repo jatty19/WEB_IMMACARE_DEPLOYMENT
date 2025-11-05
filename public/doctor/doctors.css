@@ -1,0 +1,20 @@
+.workingd{
+    margin-top: 15px;
+}
+
+
+.headerInfo{
+    font-size: 20px;
+}
+
+.readonly{
+    background-color: #e9ecef;;
+}
+
+body {
+  font-size: 13px; /* or smaller */
+}
+
+table, td, th, input, button, select {
+  font-size: inherit;
+}

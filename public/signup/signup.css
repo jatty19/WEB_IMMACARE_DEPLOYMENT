@@ -1,0 +1,200 @@
+
+h2 {
+  margin-bottom: 10px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+body {
+  background-color: #f7f8fa;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+p {
+  margin-top: 15px;
+}
+
+input,
+select {
+  padding: 10px;
+  margin: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box; /* Ensures padding doesn't affect width */
+}
+
+.btn-primary {
+  background-color: #006aff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #0056d2;
+}
+
+.gender-selection {
+  display: flex;
+  gap: 20px; /* spacing between Male and Female */
+  justify-content: center; /* optional: center the group */
+  margin: 10px 0;
+}
+
+.gender-selection label {
+  display: flex;
+  align-items: center;
+  gap: 5px; /* space between radio and label text */
+}
+.form-row {
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  align-items: flex-start;
+}
+
+.gender-selection,
+.inline-date {
+  display: flex;
+  align-items: center;
+}
+.inline-date {
+  gap: 10px;
+}
+.gender-selection label,
+.inline-date label {
+  margin-right: 5px;
+}
+
+input#Age {
+  width: 15%;
+}
+
+
+h4 {
+  margin-right: 59%;
+}
+
+#bday_label {
+  display: block;
+  text-align: left;
+  margin-bottom: 5px;
+  margin-left: 10px;
+  margin-top: 5px;
+  font-size: small;
+}
+
+#birthdate {
+  width: 51%;
+}
+
+.inline-group {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* space between elements */
+  margin-bottom: 10px;
+}
+
+.inline-group label {
+  min-width: 70px;
+  text-align: left;
+  font-weight: bold;
+}
+
+.inline-group input[type="date"],
+.inline-group input[type="number"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+#error-message {
+  color: red;
+  display: none;
+  font-size: 10px;
+  width: 54%;
+  margin-bottom: -5px;
+}
+/*  
+#firstName-error{
+   color: red;
+  display: none;
+  font-size: 10px;
+  width: 76%;
+  margin-bottom: -5px;
+} */
+
+.signup-box {
+  background-color: #fff;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 20px;
+}
+
+h4 {
+  font-weight: 600;
+  margin-bottom: 25px;
+  color: #333;
+}
+
+.text-center small {
+  display: block;
+  margin-top: 20px;
+}
+
+a {
+  color: #006aff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.btn-primary {
+  background-color: #006aff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+  color:white;
+}
+
+.btn-primary:hover {
+  background-color: #0056d2;
+}
+.noacc{
+  text-align: center;
+  margin-top: 1px; /* Adjust as needed */
+
+}
+
+/* bermejo */
+  .password-requirements {
+    font-size: 14px;
+    color: #666;
+    margin-top: 5px;
+  }
+  .password-requirements span {
+    display: block;
+  }
+  .valid {
+    color: green;
+  }
+  .invalid {
+    color: red;
+  }

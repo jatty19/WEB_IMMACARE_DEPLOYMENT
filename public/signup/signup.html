@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up - ImmaCare+</title>
+    <link rel="stylesheet" href="signup.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  </head>
+  <body>
+    <!-- bermejo edit below -->
+    <!-- <form id="signup-form" action="/register" method="POST" class="signup-box"> -->
+      <form id="signup-form" class="signup-box">
+
+      <!-- Full Name (letters only) -->
+      
+      <h2 class="text-center mb-4">Create an Account</h2>
+      <h4>Personal Information</h4>
+      <input
+        type="text"
+        id="firstName"
+        name="firstname"
+        placeholder="First Name"
+        pattern="[A-Za-z ]+"
+        title="Only letters and spaces allowed"
+        maxlength="20"
+      />
+      <!-- <span id="firstName-error" class="error-message">First name is required and must 
+            contain only letters and spaces.</span> -->
+      <input
+        type="text"
+        id="middleName"
+        name="middlename"
+        placeholder="Middle Name (optional)"
+        pattern="[A-Za-z ]+"
+        title="Only letters and spaces allowed"
+        maxlength="20"
+      />
+
+      <input
+        type="text"
+        id="lastName"
+        name="lastname"
+        placeholder="Last Name"
+        pattern="[A-Za-z ]+"
+        title="Only letters and spaces allowed"
+        maxlength="20"
+      />
+
+      <!-- Gender Radio Buttons -->
+      <select id="gender" name="gender">
+        <option value="" disabled selected>Gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
+      <div class="inline-group">
+        <label for="birthdate" id="bday_label">Birthdate</label>
+        <input type="date" id="birthdate" name="birthdate" />
+        <input
+          type="number"
+          id="age"
+          name="age"
+          placeholder="Age"
+          min="1"
+          max="3"
+          readonly
+        />
+      </div>
+      <h4>Account Information</h4>
+      <!-- Phone Number (numbers only) -->
+      <input
+        type="tel"
+        id="phone"
+        name="phone"
+        placeholder="Phone Number"
+        maxlength="13"
+        oninput="this.value = this.value.replace(/[^0-9]/g, '');"
+      />
+
+      <!-- Email (max 50 chars) -->
+      <!-- <span id="error-message">
+            Email must end with lowercase @gmail.com</span
+          > -->
+      <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="Email"
+        maxlength="50"
+      />
+
+      <!-- Password -->
+      <input
+        type="password"
+        id="password"
+        name="password"
+        placeholder="Password"
+        maxlength="50"
+      />
+
+      <!-- Confirm Password -->
+      <input
+        type="password"
+        id="confirmPassword"
+        name="confirmPassword"
+        placeholder="Confirm Password"
+        maxlength="50"
+      />
+      <!-- bermejo -->
+      <div class="password-requirements" id="requirements">
+  <span id="length" class="invalid">• At least 8 characters</span>
+  <span id="uppercase" class="invalid">• At least one uppercase letter (A–Z)</span>
+  <span id="lowercase" class="invalid">• At least one lowercase letter (a–z)</span>
+  <span id="number" class="invalid">• At least one number (0–9)</span>
+  <span id="special" class="invalid">• At least one special character (!@#$%^&*)</span>
+  <span id="match" class="invalid">• Passwords must match</span>
+</div>
+
+
+      <button type="submit" class="btn btn-primary w-100">SIGN UP</button>
+      <div class="text-center mt-5 noacc">
+        <small>
+          Already have an Account? <a href="../login/login.html">Login Here</a>
+        </small>
+      </div>
+    </form>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="signup.js"></script>
+  </body>
+</html>

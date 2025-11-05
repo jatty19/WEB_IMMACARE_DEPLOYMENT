@@ -1,0 +1,277 @@
+.buttonTime {
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.consultationDiv {
+  margin-bottom: 20px;
+}
+
+.buttons-time {
+  margin-top: 50px;
+}
+.labelTag {
+  font-size: large;
+}
+
+.medInfo {
+  margin-top: 20px;
+}
+.btn.disabled {
+  pointer-events: none;
+  opacity: 0.6;
+  background-color: #d3d4d5;
+  color: #686d76;
+}
+
+.selected-date {
+  background-color: #0d6efd !important; /* Bootstrap primary */
+  color: white !important;
+  border: 2px solid #0a58ca;
+}
+
+.selected-time {
+  background-color: #0d6efd !important; /* Bootstrap primary */
+  color: white !important;
+  border: 2px solid #0a58ca;
+}
+
+.form-step {
+  display: none;
+}
+.form-step.active {
+  display: block;
+}
+.step-indicator .step {
+  width: 100%;
+  text-align: center;
+  position: relative;
+}
+.step-indicator .step::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  background-color: #dee2e6;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: -1;
+}
+.step-indicator .step.active::before,
+.step-indicator .step.completed::before {
+  background-color: #0d6efd;
+}
+.step-indicator .step span {
+  background-color: #dee2e6;
+  color: #495057;
+  padding: 10px 15px;
+  border-radius: 50%;
+  display: inline-block;
+  z-index: 1;
+  position: relative;
+}
+.step-indicator .step.active span,
+.step-indicator .step.completed span {
+  background-color: #0d6efd;
+  color: white;
+}
+
+.page-container {
+  display: none;
+}
+.page-container.active {
+  display: block;
+}
+
+
+.lastnext{
+  margin-bottom: 50px;
+}
+
+.bookConsultationType{
+  font-size: 20px;
+}
+
+body {
+  font-size: 13px; /* or smaller */
+}
+
+table, td, th, input, button, select {
+  font-size: inherit;
+}
+
+
+/* ====== Step 5: Confirmation Section ====== */
+/* STEP 5 - Confirmation Layout */
+/* STEP 5 - Confirmation Section */
+.form-step {
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: #111;
+  background-color: #fff;
+  padding: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Title and intro text */
+.form-step h5 {
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 10px;
+  text-align: center;
+  color: #222;
+}
+
+.form-step p {
+  font-size: 14px;
+  color: #555;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+/* Section titles */
+.form-step strong {
+  display: block;
+  font-weight: 600;
+  font-size: 15px;
+  margin: 30px 0 15px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 5px;
+  color: #222;
+}
+
+/* Two-column layout */
+.info-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  column-gap: 40px;
+}
+
+.info-section .col {
+  flex: 1 1 45%;
+  min-width: 300px;
+}
+
+/* Each label + data pair */
+.info-pair {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.info-pair label {
+  flex: 0 0 140px;
+  font-weight: 500;
+  color: #333;
+  font-size: 14px;
+  text-align: right;
+  margin-right: 10px;
+}
+
+/* Data box style — looks like a disabled text field */
+.info-pair span {
+  flex: 1;
+  font-size: 14px;
+  color: #222;
+  background: #fefefe;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 8px 10px;
+  display: inline-block;
+  min-height: 34px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Buttons at bottom */
+.lastnext {
+  margin-top: 35px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.lastnext .btn {
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 4px;
+  padding: 8px 18px;
+}
+
+.btn-secondary {
+  background: #e0e0e0;
+  color: #000;
+  border: 1px solid #ccc;
+}
+
+.btn-secondary:hover {
+  background: #d5d5d5;
+}
+
+.btn-success {
+  background: #4caf50;
+  border: 1px solid #3e8e41;
+  color: #fff;
+}
+
+.btn-success:hover {
+  background: #43a047;
+}
+
+/* Subtle divider between sections */
+.divider {
+  border-top: 1px dashed #ccc;
+  margin: 25px 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .info-section {
+    flex-direction: column;
+  }
+
+  .info-pair {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .info-pair label {
+    text-align: left;
+    flex: 0 0 100%;
+    margin-bottom: 4px;
+  }
+
+  .info-pair span {
+    width: 100%;
+  }
+
+  .lastnext {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+
+/* bermejo */
+ .invalid-input {
+    border: 2px solid #dc3545 !important;
+  }
+
+  .error-tooltip {
+    position: absolute;
+    top: -22px;
+    right: 5px;
+    background-color: #dc3545;
+    color: white;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    white-space: nowrap;
+    z-index: 10;
+  }
+
+  .input-wrapper {
+    position: relative;
+  }

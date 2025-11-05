@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Immacare+</title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="/bootstrap-icons/font/bootstrap-icons.min.css"
+    />
+
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/jquery/jquery.min.js"></script>
+    <script src="header_menu.js"></script>
+  </head>
+
+  <body>
+    <div class="d-flex" style="height: 100vh; overflow: hidden">
+      <div
+        class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark full-height"
+        style="width: 280px; height: 100vh; overflow-y: auto"
+      >
+        <a
+          href="/"
+          class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
+        >
+          <svg class="bi me-2" width="40" height="32">
+            <use xlink:href="#bootstrap"></use>
+          </svg>
+          <span class="fs-4">Immacare</span>
+        </a>
+        <hr />
+        <ul class="nav nav-pills flex-column mb-auto">
+          <input type="hidden" id="role" />
+          <li class="nav-item" id="home">
+            <a
+              href="#"
+              class="nav-link active"
+              onclick="loadPage('../homepage/homepage.html')"
+              aria-current="page"
+            >
+              <i class="bi bi-house me-2"></i>
+              Home
+            </a>
+          </li>
+          <li id="dashboard">
+            <a
+              href="#"
+              class="nav-link text-white"
+              onclick="loadPage('../dashboard/dashboard.html')"
+            >
+              <i class="bi bi-speedometer2 me-2"></i>
+              Dashboard
+            </a>
+          </li>
+          <li id="bookAppointment">
+            <a
+              href="#"
+              class="nav-link text-white"
+              onclick="loadPage('../appointment_booking/appointment_booking.html')"
+            >
+              <i class="bi bi-calendar2-week me-2"></i>
+              Book an Appointment
+            </a>
+          </li>
+          <li id="appointmentList">
+            <a
+              href="#"
+              class="nav-link text-white"
+              onclick="loadPage('../appointment_booking/appointment_list.html')"
+            >
+              <i class="bi bi-calendar2-week me-2"></i>
+              Appointment List
+            </a>
+          </li>
+          <li id="myProfilePatient">
+            <a
+              href="#"
+              class="nav-link text-white"
+              onclick="loadPage('../patient/patient_profile.html')"
+            >
+              <span>
+                <i class="bi bi-person-rolodex me-2"></i>
+                My Profile
+              </span>
+            </a>
+          </li>
+          <li id="patients">
+            <a
+              class="nav-link text-white d-flex justify-content-between align-items-center"
+              data-bs-toggle="collapse"
+              href="#patientsSubmenu"
+              role="button"
+              aria-expanded="false"
+              aria-controls="patientsSubmenu"
+            >
+              <span>
+                <i class="bi bi-person-rolodex me-2"></i>
+                Patients
+              </span>
+              <i class="bi bi-chevron-down small"></i>
+            </a>
+            <div class="collapse ps-4" id="patientsSubmenu">
+              <ul class="nav flex-column">
+                <li class="nav-item" id="patientList">
+                  <!-- <a
+                    href="#"
+                    class="nav-link text-white"
+                    onclick="loadPage('../patient/patient_add.html')"
+                  >
+                    <i class="bi bi-list-ul me-2"></i>
+                    Add Patient
+                  </a> -->
+                  <a
+                    href="#"
+                    class="nav-link text-white"
+                    onclick="loadPage('../patient/patient_list.html')"
+                  >
+                    <i class="bi bi-list-ul me-2"></i>
+                    Patient List
+                  </a>
+                </li>
+                <!-- <li class="nav-item" id="patientLog">
+                  <a
+                    href="#"
+                    class="nav-link text-white"
+                    onclick="loadPage('../patient/patient_history.html')"
+                  >
+                    <i class="bi bi-list-ul me-2"></i>
+                    Patient Log
+                  </a>
+                </li> -->
+                <!-- <li class="nav-item">
+                  <a
+                    href="#"
+                    class="nav-link text-white"
+                    onclick="loadPage('../patient/patient_booking.html')"
+                  >
+                    <i class="bi bi-list-ul me-2"></i>
+                    Patient Booking
+                  </a>
+                </li> -->
+                <!-- <li class="nav-item">
+                  <a
+                    href="#"
+                    class="nav-link text-white"
+                    onclick="loadPage('../patient_profile/add_patient.html')"
+                  >
+                    <i class="bi bi-person-plus me-2"></i>
+                    Add Patient
+                  </a>
+                </li> -->
+              </ul>
+            </div>
+          </li>
+          <li id="doctors">
+            <a
+              href="#"
+              class="nav-link text-white"
+              onclick="loadPage('../doctor/doctors_list.html')"
+            >
+              <span>
+                <i class="bi bi-person-vcard me-2"></i>
+                Doctors
+              </span>
+            </a>
+          </li>
+          <li id="myProfileDoctor">
+            <a
+              href="#"
+              class="nav-link text-white"
+              onclick="loadPage('../doctor/doctors_profile.html')"
+            >
+              <span>
+                <i class="bi bi-person-vcard me-2"></i>
+                My Profile
+              </span>
+            </a>
+          </li>
+          <li id="finance">
+            <a
+              class="nav-link text-white d-flex justify-content-between align-items-center"
+              data-bs-toggle="collapse"
+              href="#financeSubmenu"
+              role="button"
+              aria-expanded="false"
+              aria-controls="financeSubmenu"
+            >
+              <span>
+                <i class="bi bi-journals me-2"></i>
+                Financial Report
+              </span>
+              <i class="bi bi-chevron-down small"></i>
+            </a>
+            <div class="collapse ps-4" id="financeSubmenu">
+              <ul class="nav flex-column">
+                <li class="nav-item">
+                  <a
+                    href="#"
+                    class="nav-link text-white"
+                    onclick="loadPage('../financial_report/financial_report.html')"
+                  >
+                    <i class="bi bi-list-ul me-2"></i>
+                    Inventory Financial
+                  </a>
+                </li>
+
+                <!-- <li class="nav-item">
+                  <a
+                    href="#"
+                    class="nav-link text-white"
+                    onclick="loadPage('../financial_report/financial_staff.html')"
+                  >
+                    <i class="bi bi-list-ul me-2"></i>
+                    Staff fees
+                  </a>
+                </li> -->
+              </ul>
+            </div>
+          </li>
+          <li id="inventory">
+            <a
+              href="#"
+              class="nav-link text-white"
+              onclick="loadPage('../inventory/inventory.html')"
+            >
+              <i class="bi bi-box-seam me-2"></i>
+              Inventory
+            </a>
+          </li>
+          <li id="userAccess">
+            <a
+              href="#"
+              class="nav-link text-white"
+              onclick="loadPage('../user_access/user_access.html')"
+            >
+              <i class="bi bi-person-circle me-2"></i>
+              User Access
+            </a>
+          </li>
+        </ul>
+        <hr />
+        <div class="dropdown">
+          <a
+            href="#"
+            class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+            id="dropdownUser1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <img
+              src="https://github.com/mdo.png"
+              alt=""
+              width="32"
+              height="32"
+              class="rounded-circle me-2"
+            />
+            <strong id="usernameDisplay"></strong>
+          </a>
+          <ul
+            class="dropdown-menu dropdown-menu-dark text-small shadow"
+            aria-labelledby="dropdownUser1"
+          >
+            <li>
+              <a class="dropdown-item" href="../login/login.html" id="logoutBtn"
+                >Sign out</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="flex-grow-1 p-4 mb-2">
+        <iframe
+          id="main-content-frame"
+          style="width: 100%; height: 100vh; border: none"
+        ></iframe>
+      </div>
+    </div>
+  </body>
+</html>
