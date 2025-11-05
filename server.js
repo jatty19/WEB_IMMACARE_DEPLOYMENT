@@ -1,4 +1,5 @@
 const express = require("express");
+require('dotenv').config(); 
 const nodemailer = require("nodemailer");
 const path = require("path");
 const bodyParser = require("body-parser");
