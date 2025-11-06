@@ -14,21 +14,13 @@ const session = require("express-session");
 
 // Initialize Express app
 const app = express();
-const port = 5300;
 
 // Middleware setup
-app.use(cors({
-  origin: 'http://localhost:5300',
-  credentials: true
-}));
-app.use(express.static(__dirname));
-app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(session({
-  secret: 'immacareSecretKey123',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: false }
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors({
+  origin: process.env.FRONTEND_URL || "http://localhost:3000",
+  credentials: true
 }));
 
 // ✅ SERVE STATIC FILES - UPDATED FOR FRONTEND
@@ -76,9 +68,16 @@ app.use(
 );
 
 // MongoDB connection
-mongoose.connect('mongodb+srv://bernejojoshua:immacare@immacare.xr6wcn1.mongodb.net/accounts?retryWrites=true&w=majority')
-  .then(() => console.log("✅ MongoDB Atlas connected successfully."))
-  .catch(err => console.error("❌ MongoDB connection error:", err));
+const mongoURI = process.env.MONGODB_URI;
+if (!mongoURI) {
+  console.error("❌ MONGODB_URI is not defined in your .env file.");
+  process.exit(1);
+}
+
+mongoose
+  .connect(mongoURI)
+  .then(() => console.log("✅ MongoDB connected successfully"))
+  .catch((err) => console.error("❌ MongoDB connection error:", err));
 
 // ✅ MONGODB SCHEMAS
 const userSchema = new mongoose.Schema({
@@ -172,7 +171,7 @@ const DoctorRecommendation = mongoose.model('DoctorRecommendation', doctorRecomm
 
 // ✅ FRONTEND ROUTES
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../web_immacare_deployment/main.html"));
+  res.sendFile(path.join(__dirname, "../web_immacare/main.html"));
 });
 
 app.get("/login", (req, res) => {
