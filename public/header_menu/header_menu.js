@@ -32,7 +32,7 @@ function loadPage(url) {
   document.getElementById("main-content-frame").src = url;
 }
 document.addEventListener("DOMContentLoaded", function () {
-  fetch("http://localhost:3000/homepage", {
+  fetch("http://https://web-immacare-deployment-6.onrender.com/homepage", {
     method: "GET",
     credentials: "include",
   })

@@ -37,7 +37,7 @@ form.addEventListener("submit", async (e) => {
     });
 
   try {
-    const response = await fetch("http://localhost:3000/login", {
+    const response = await fetch("http://web-immacare-deployment-6.onrender.com/login", {
       // Make sure port matches your backend
       method: "POST",
       headers: { "Content-Type": "application/json" },

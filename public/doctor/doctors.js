@@ -169,7 +169,7 @@ function checkSpecialty(specialtyId) {
 }
 
 function getSession() {
-  fetch("http://localhost:3000/homepage", {
+  fetch("https://http://web-immacare-deployment-6.onrender.com/homepage", {
     method: "GET",
     credentials: "include",
   })

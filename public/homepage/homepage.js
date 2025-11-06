@@ -1,4 +1,4 @@
-fetch('http://localhost:3000/homepage', {
+fetch('https://web-immacare-deployment-6.onrender.com/homepage', {
   method: 'GET',
   credentials: 'include' // This is crucial for session/cookie-based auth
 })
