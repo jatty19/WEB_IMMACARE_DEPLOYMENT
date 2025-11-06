@@ -171,7 +171,7 @@ const DoctorRecommendation = mongoose.model('DoctorRecommendation', doctorRecomm
 
 // ✅ FRONTEND ROUTES
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../web_immacare/main.html"));
+  res.sendFile(path.join(__dirname, "../web_immacare_deployment/main.html"));
 });
 
 app.get("/login", (req, res) => {
