@@ -18,7 +18,10 @@ const app = express();
 // Middleware setup
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors({
+  origin: process.env.FRONTEND_URL || "http://localhost:3000",
+  credentials: true
+}));
 
 // Set EJS as the template engine (if used)
 app.set("view engine", "ejs");
@@ -27,16 +30,20 @@ app.set("views", path.join(__dirname, "views"));
 // Static files (CSS, JS, images)
 app.use(express.static(path.join(__dirname, "public")));
 
-// Express session setup
+// Express session setup with better production settings
 app.use(
   session({
-    secret: process.env.SESSION_SECRET || "secret-key",
+    secret: process.env.SESSION_SECRET || crypto.randomBytes(64).toString('hex'),
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
+    cookie: {
+      secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
+      maxAge: 24 * 60 * 60 * 1000 // 24 hours
+    }
   })
 );
 
-// MongoDB connection
+// MongoDB connection - UPDATED (remove deprecated options)
 const mongoURI = process.env.MONGODB_URI;
 if (!mongoURI) {
   console.error("❌ MONGODB_URI is not defined in your .env file.");
@@ -44,16 +51,26 @@ if (!mongoURI) {
 }
 
 mongoose
-  .connect(mongoURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(mongoURI)
   .then(() => console.log("✅ MongoDB connected successfully"))
   .catch((err) => console.error("❌ MongoDB connection error:", err));
 
 // Example route
 app.get("/", (req, res) => {
-  res.send("🚀 ImmaCare+ Backend is running!");
+  res.json({ 
+    message: "🚀 ImmaCare+ Backend is running!",
+    timestamp: new Date().toISOString(),
+    environment: process.env.NODE_ENV || 'development'
+  });
+});
+
+// Health check route for Render
+app.get("/health", (req, res) => {
+  res.status(200).json({ 
+    status: "OK", 
+    database: mongoose.connection.readyState === 1 ? "Connected" : "Disconnected",
+    timestamp: new Date().toISOString()
+  });
 });
 
 // Example email setup (optional)
@@ -79,6 +96,20 @@ app.post("/send-email", async (req, res) => {
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
   }
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ 
+    success: false, 
+    error: process.env.NODE_ENV === 'production' ? 'Something went wrong!' : err.message 
+  });
+});
+
+// 404 handler
+app.use((req, res) => {
+  res.status(404).json({ success: false, error: "Route not found" });
 });
 
 // Server listen
