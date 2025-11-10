@@ -58,14 +58,17 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
   const dateInput = document.getElementById("newDateBooking");
 
-  const today = new Date();
-  today.setDate(today.getDate() + 1); // Tomorrow
+  // FIX: Only run this code if the dateInput element actually exists on the page.
+  if (dateInput) {
+    const today = new Date();
+    today.setDate(today.getDate() + 1); // Tomorrow
 
-  const yyyy = today.getFullYear();
-  const mm = String(today.getMonth() + 1).padStart(2, "0");
-  const dd = String(today.getDate()).padStart(2, "0");
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, "0");
+    const dd = String(today.getDate()).padStart(2, "0");
 
-  dateInput.min = `${yyyy}-${mm}-${dd}`;
+    dateInput.min = `${yyyy}-${mm}-${dd}`;
+  }
 });
 
 function generateQueueNumber() {
@@ -1343,19 +1346,13 @@ function patientDetails(patient_user_id) {
 document.addEventListener("DOMContentLoaded", function () {
   // ===== Name fields that shouldn't contain numbers =====
   const noNumberFields = [
-    "firstname",
-    "middlename",
-    "lastname",
-    "name",
-    "alergies",
-    "currentMedication",
-    "pastMedicalConditions",
-    "chronicIllnes",
+    "firstname", "middlename", "lastname", "name", "alergies",
+    "currentMedication", "pastMedicalConditions", "chronicIllnes",
   ];
 
   noNumberFields.forEach((id) => {
     const input = document.getElementById(id);
-    if (!input) return;
+    if (!input) return; // Skip if element doesn't exist
 
     input.addEventListener("input", function (e) {
       const regex = /^[A-Za-z,\s]*$/;
@@ -1381,78 +1378,79 @@ document.addEventListener("DOMContentLoaded", function () {
 
   mobileFields.forEach((id) => {
     const input = document.getElementById(id);
-    if (!input) return;
+    if (!input) return; // Skip if element doesn't exist
 
-    // Always start with "09"
-    if (!input.value.startsWith("09")) input.value = "09";
+    // Set initial value if empty
+    if (!input.value) input.value = "09";
 
     input.addEventListener("input", function (e) {
-      // Allow only digits
       e.target.value = e.target.value.replace(/[^0-9]/g, "");
-
-      // Force "09" prefix if removed
       if (!e.target.value.startsWith("09")) {
         e.target.value = "09";
       }
-
-      // Limit to 11 digits
       if (e.target.value.length > 11) {
         e.target.value = e.target.value.slice(0, 11);
       }
-
+      
       // Error handling
       let errorMsg = input.parentNode.querySelector(".error-msg");
       if (errorMsg) errorMsg.remove();
-
       if (e.target.value.length !== 11) {
         input.classList.add("invalid-input");
-        errorMsg = document.createElement("small");
-        errorMsg.classList.add("error-msg");
-        errorMsg.innerText = "Mobile number must be 11 digits and start with 09.";
-        input.parentNode.appendChild(errorMsg);
-        setTimeout(() => errorMsg.remove(), 1500);
       } else {
         input.classList.remove("invalid-input");
       }
     });
-
-    // Prevent cursor before “09”
+    
+    // Prevent cursor from moving before "09"
+    input.addEventListener("keydown", function(e) {
+        if (e.target.selectionStart < 2 && (e.key === "Backspace" || e.key === "Delete" || e.key.startsWith("Arrow"))) {
+            e.preventDefault();
+        }
+    });
     input.addEventListener("click", function () {
-      if (input.selectionStart < 2) {
-        input.setSelectionRange(2, 2);
-      }
+        if (input.selectionStart < 2) {
+            input.setSelectionRange(2, 2);
+        }
     });
   });
 
   // ===== Block form submission if any invalid input exists =====
-  const form = document.querySelector("form"); // Adjust selector if needed
+  const form = document.querySelector("form");
+  
+  if (form) {
+    form.addEventListener("submit", function (e) {
+      let hasError = false;
 
-  form.addEventListener("submit", function (e) {
-    let hasError = false;
+      // Check all visible inputs for the 'invalid-input' class
+      form.querySelectorAll("input:not([type=hidden])").forEach((input) => {
+        if (input.classList.contains("invalid-input")) {
+          hasError = true;
+        }
+      });
 
-    // Check all text inputs with invalid-input class
-    document.querySelectorAll("input").forEach((input) => {
-      if (input.classList.contains("invalid-input") || input.value.trim() === "") {
-        hasError = true;
+      // Specifically re-validate mobile numbers
+      mobileFields.forEach((id) => {
+        const input = document.getElementById(id);
+        if (input) {
+          const value = input.value.trim();
+          if (!value.startsWith("09") || value.length !== 11) {
+            hasError = true;
+            input.classList.add("invalid-input");
+          }
+        }
+      });
+      
+      if (hasError) {
+        e.preventDefault(); // Stop the form from submitting
+        Swal.fire({
+            title: "Invalid Fields",
+            text: "Please correct the highlighted fields before proceeding.",
+            icon: "error",
+        });
       }
     });
-
-    // Recheck mobile numbers specifically
-    mobileFields.forEach((id) => {
-      const input = document.getElementById(id);
-      if (!input) return;
-
-      const value = input.value.trim();
-      if (!value.startsWith("09") || value.length !== 11) {
-        hasError = true;
-        input.classList.add("invalid-input");
-      }
-    });
-
-    if (hasError) {
-      e.preventDefault();
-      alert("Please fix invalid fields before proceeding.");
-    }
-  });
+  }
 });
+
 
