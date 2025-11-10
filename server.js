@@ -24,8 +24,8 @@ app.use(express.static(path.join(__dirname)));
 // --- Static File Serving ---
 // app.use(express.static(path.join(__dirname, "web_immacare")));
 // app.use(express.static(path.join(__dirname, "public")));
-app.use("/login", express.static(path.join(__dirname, "login")));
-app.use("/landing_page", express.static(path.join(__dirname, "landing_page")));
+app.use(express.static(path.join(__dirname, "login")));
+app.use(express.static(path.join(__dirname, "landing_page")));
 app.use("/bootstrap", express.static(path.join(__dirname, "node_modules/bootstrap/dist")));
 app.use("/bootstrap-icons", express.static(path.join(__dirname, "node_modules/bootstrap-icons")));
 app.use("/datatables.net", express.static(path.join(__dirname, "node_modules/datatables.net")));
