@@ -126,7 +126,7 @@ const transporter = nodemailer.createTransport({
 });
 
 // --- Routes ---
-app.get("/", (req, res) => res.sendFile(path.join(__dirname, "web_immacare", "main.html")));
+app.get("/", (req, res) => res.sendFile(path.join(__dirname, "main.html")));
 app.get("/landing", (req, res) => res.sendFile(path.join(__dirname, "landing_page", "landing.html")));
 
 // =================================================================
