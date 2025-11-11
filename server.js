@@ -19,13 +19,9 @@ app.use(cors({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
-app.use(express.static(path.join(__dirname)));
 // --- Static File Serving ---
-// app.use(express.static(path.join(__dirname, "web_immacare")));
-// app.use(express.static(path.join(__dirname, "public")));
-app.use(express.static(path.join(__dirname, "login")));
-app.use(express.static(path.join(__dirname, "landing_page")));
+app.use(express.static(path.join(__dirname, "web_immacare")));
+app.use(express.static(path.join(__dirname, "public")));
 app.use("/bootstrap", express.static(path.join(__dirname, "node_modules/bootstrap/dist")));
 app.use("/bootstrap-icons", express.static(path.join(__dirname, "node_modules/bootstrap-icons")));
 app.use("/datatables.net", express.static(path.join(__dirname, "node_modules/datatables.net")));
@@ -41,7 +37,7 @@ app.use(
     cookie: {
         maxAge: 1000 * 60 * 60 * 24, // 1 day
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production' // Set to true if using HTTPS
+        secure: false // Set to true if using HTTPS
     },
   })
 );
@@ -130,25 +126,12 @@ const transporter = nodemailer.createTransport({
 });
 
 // --- Routes ---
-app.get("/", (req, res) => {
-    // Try to serve login page by default, or redirect to it
-    res.redirect("/login/login.html");
-});
-
-app.get("/main", (req, res) => {
-    res.sendFile(path.join(__dirname, "main.html"));
-});
-
-// app.get("/", (req, res) => res.sendFile(path.join(__dirname, "main.html")));
+app.get("/", (req, res) => res.sendFile(path.join(__dirname, "web_immacare", "main.html")));
 app.get("/landing", (req, res) => res.sendFile(path.join(__dirname, "landing_page", "landing.html")));
 
 // =================================================================
 // --- AUTHENTICATION & REGISTRATION API ENDPOINTS ---
 // =================================================================
-
-app.get("/login-page", (req, res) => {
-    res.sendFile(path.join(__dirname, "login", "login.html"));
-});
 
 app.post("/login", async (req, res) => {
     const { email, password } = req.body;
@@ -626,12 +609,7 @@ app.post("/giveRecommendation", async (req, res) => { const { appointment_id, re
 app.get("/getConsultationDetails", async (req, res) => { const { user_id } = req.query; if (!mongoose.isValidObjectId(user_id)) return res.status(400).json({ message: "Invalid user ID" }); try { const patient = await PatientInfo.findOne({ user_id }); if (!patient) return res.status(200).json({ data: [] }); const bookings = await AppointmentBooking.find({ patient_id: patient._id, status: { $in: ["Consulted", "Emergency", "Completed"] } }).populate('doctor_id', 'firstname lastname').sort({ booking_date: -1 }); const recommendations = await DoctorRecommendation.find({ appointment_id: { $in: bookings.map(b => b._id) } }); const recMap = new Map(recommendations.map(r => [r.appointment_id.toString(), r])); const data = bookings.map(b => ({ consultation_date: b.booking_date, consultation_type: b.consultation_type, recommendation: recMap.get(b._id.toString())?.recommendation || 'N/A', follow_up: recMap.get(b._id.toString())?.follow_up_required ? 'Yes' : 'No', doctor_fullname: b.doctor_id ? `${b.doctor_id.firstname} ${b.doctor_id.lastname}` : 'N/A', consultation_status: b.status })); res.status(200).json({ data }); } catch (err) { console.error("Get consultation details error:", err); res.status(500).json({ message: "Failed to retrieve consultation details." }); } });
 
 // --- Server Start ---
-// const PORT = 3000;
-// app.listen(PORT, () => {
-//   console.log(`Server is running at http://localhost:${PORT}/login/login.html`);
-// });
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-  console.log(`Available at: http://localhost:${PORT}`);
+  console.log(`Server is running at http://localhost:${PORT}/login/login.html`);
 });
